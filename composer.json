@@ -1,7 +1,7 @@
 {
   "name": "ahmad/sitemap",
   "description": "A sitemap migrate composer package",
-  "type": "composer-plugin",
+  "type": "library",
   "authors": [
       {
           "name": "ahmadkein31",
@@ -13,6 +13,6 @@
         "Ahmad\\SitemapMigrate\\": ""
       }
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "require": {}
 }
