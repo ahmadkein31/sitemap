@@ -55,22 +55,24 @@
                 jQuery('#submit_url').click(function(event) {
                     var curlurl = jQuery('#sitemap_url').val();
                     jQuery("button#submit_url").prop('disabled', true);
-                        jQuery.ajax({
-                            type: "POST",
-                            url: "sitemapcurl",
-                            data: {sitemapurl:curlurl},
-                            dataType: "json",
-                            success          :   function( data ) {
-                                if( data.success ){
-                                    alert('Sync url successfully');
-                                }else{
-                                    alert(data.message);
-                                }
-                            },
-                            complete        :   function() {
-                                jQuery("button#submit_url").prop('disabled', false);
+                    jQuery("button#submit_url").html('Syncing...');
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "sitemapcurl",
+                        data: {sitemapurl:curlurl},
+                        dataType: "json",
+                        success          :   function( data ) {
+                            if( data.success ){
+                                alert('Sync url successfully');
+                            }else{
+                                alert(data.message);
                             }
-                        });
+                        },
+                        complete        :   function() {
+                            jQuery("button#submit_url").prop('disabled', false);
+                            jQuery("button#submit_url").html('Submit URL');
+                        }
+                    });
                 });
             </script>
         </div>

@@ -3,7 +3,7 @@
 namespace Ahmad\SitemapMigrate\Controller;
 
 use Snowdog\DevTest\Model\UserManager;
-use Snowdog\DevTest\Model\SitemapManager;
+use Ahmad\SitemapMigrate\Model\SitemapManager;
 
 class SitemapCurlAction
 {

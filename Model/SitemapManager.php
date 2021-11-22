@@ -3,6 +3,9 @@
 namespace Ahmad\SitemapMigrate\Model;
 
 use Snowdog\DevTest\Core\Database;
+use Snowdog\DevTest\Model\User;
+use Snowdog\DevTest\Model\Website;
+use Snowdog\DevTest\Model\Page;
 
 class SitemapManager
 {
@@ -14,18 +17,6 @@ class SitemapManager
     public function __construct(Database $database)
     {
         $this->database = $database;
-    }
-
-    public function getByLogin($login)
-    {
-        /** @var \PDOStatement $query */
-        $query = $this->database->prepare('SELECT * FROM users WHERE login = :login');
-        $query->setFetchMode(\PDO::FETCH_CLASS, User::class);
-        $query->bindParam(':login', $login, \PDO::PARAM_STR);
-        $query->execute();
-        /** @var User $user */
-        $user = $query->fetch(\PDO::FETCH_CLASS);
-        return $user;
     }
 
     public function getByHostname($hostname) {

@@ -8,7 +8,8 @@ use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Snowdog\DevTest\Model\SitemapManager;
+use Ahmad\SitemapMigrate\Model\SitemapManager;
+use Snowdog\DevTest\Model\UserManager;
 
 class SitemapMigrateCommand
 {
@@ -22,6 +23,10 @@ class SitemapMigrateCommand
      */
     private $helper;
     /**
+     * @var UserManager
+     */
+    private $userManager;
+    /**
      * @var Database
      */
     private $database;
@@ -33,10 +38,12 @@ class SitemapMigrateCommand
     public function __construct(
         Migration $migration, 
         QuestionHelper $helper, 
+        UserManager $userManager,
         SitemapManager $sitemapManager
     ) {
         $this->migration = $migration;
         $this->helper = $helper;
+        $this->userManager = $userManager;
         $this->sitemapManager = $sitemapManager;
     }
 
@@ -48,7 +55,7 @@ class SitemapMigrateCommand
             $currentDirectory = getcwd();
             $uploadDirectory = "\\web\\uploads\\";
             $filepath = $currentDirectory . $uploadDirectory . $input->getArgument('filename');
-            if(!empty($user = $this->sitemapManager->getByLogin($input->getArgument('username'))) ){
+            if(!empty($user = $this->userManager->getByLogin($input->getArgument('username'))) ){
                 if (file_exists($filepath) ) {
                     $output->writeln('File exist <comment>'.$filepath.'</comment>');
                     $fileArr = explode('.',$input->getArgument('filename'));
